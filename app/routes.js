@@ -24,14 +24,28 @@ module.exports = function(app){
 };
 */
 
-
-
 var express = require('express');
-
-var api = express.Router();
+var api = express.Router();         //express router instance
 
 api.get('/',function(req,res){
-   res.send('Hello world');
+    res.render('index.ejs');
+});
+
+api.get('/signup',function(req,res){
+   res.render('signup.ejs',{message : 'Success'});
+});
+
+api.post('/signup',function(req,res){
+    var newUser = new User();
+    newUser.local.email = req.body.email;
+    newUser.local.password = req.body.password;
+    console.log(newUser.local.email + " " + newUser.local.password);
+    newUser.save(function(err){
+       if(err){
+           throw err;
+       }
+    });
+    res.redirect('/');
 });
 
 api.get('/:username/:password',function(req,res){

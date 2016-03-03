@@ -2,10 +2,9 @@
  * Created by Tauqeer Ahmed on 3/3/2016.
  */
 var mongoose = require('mongoose');
-
 var userSchema = mongoose.Schema({
     local : {
-        username : String,
+        email : String,
         password : String
     }
 });
